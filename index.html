@@ -1,23 +1,42 @@
 <!DOCTYPE html><!--Etiqueta que define que se esta hablando con el lenguaje HTML-->
-<html lang="en"><!--Etiqueta raiz que contiene todo el docuemto y define el idioma-->
+<html lang="es"><!--Etiqueta raiz que contiene todo el docuemto y define el idioma-->
+
 <head><!--Etiqueta que contiene metadatos e informacion del documento-->
     <meta charset="UTF-8"><!--Define la codificacion de caracteres-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--Hace que el sitio sea responsivo en dispositivos moviles-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Hace que el sitio sea responsivo en dispositivos moviles-->
     <meta name="description" content="Sitio web sobre energia geotermica"><!--Descripcion del sitio web-->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>GeoEnergy</title>
+
 <body><!--Etiqueta que contiene el contenido visible del documento-->
     <!-- Navbar -->
     <nav class="navbar"><!--Etiqueta de navegacion-->
         <div class="nav-container"><!--Contenedor de la barra de navegacion-->
             <div class="nav-logo"><!--Logo de la barra de navegacion-->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-volcano"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 8v-1a2 2 0 1 0 -4 0" /><path d="M15 8v-1a2 2 0 1 1 4 0" /><path d="M4 20l3.472 -7.812a2 2 0 0 1 1.828 -1.188h5.4a2 2 0 0 1 1.828 1.188l3.472 7.812" /><path d="M6.192 15.064a2.14 2.14 0 0 1 .475 -.064c.527 -.009 1.026 .178 1.333 .5c.307 .32 .806 .507 1.333 .5c.527 .007 1.026 -.18 1.334 -.5c.307 -.322 .806 -.509 1.333 -.5c.527 -.009 1.026 .178 1.333 .5c.308 .32 .807 .507 1.334 .5c.527 .007 1.026 -.18 1.333 -.5c.307 -.322 .806 -.509 1.333 -.5c.161 .003 .32 .025 .472 .064" /><path d="M12 8v-4" /></svg><!--Icono SVG del logo-->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-volcano">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M9 8v-1a2 2 0 1 0 -4 0" />
+                    <path d="M15 8v-1a2 2 0 1 1 4 0" />
+                    <path d="M4 20l3.472 -7.812a2 2 0 0 1 1.828 -1.188h5.4a2 2 0 0 1 1.828 1.188l3.472 7.812" />
+                    <path
+                        d="M6.192 15.064a2.14 2.14 0 0 1 .475 -.064c.527 -.009 1.026 .178 1.333 .5c.307 .32 .806 .507 1.333 .5c.527 .007 1.026 -.18 1.334 -.5c.307 -.322 .806 -.509 1.333 -.5c.527 -.009 1.026 .178 1.333 .5c.308 .32 .807 .507 1.334 .5c.527 .007 1.026 -.18 1.333 -.5c.307 -.322 .806 -.509 1.333 -.5c.161 .003 .32 .025 .472 .064" />
+                    <path d="M12 8v-4" />
+                </svg><!--Icono SVG del logo-->
                 <span>GeoEnergy</span><!--Texto del logo-->
             </div>
-            
+
             <div class="nav-menu" id="nav-menu"><!--Menu de navegacion-->
-                <a href="#inicio" class="nav-link active" data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
-                <a href="#dashboard" class="nav-link" data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
-                <a href="#calculadora" class="nav-link" data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
+                <a href="#inicio" class="nav-link active"
+                    data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
+                <a href="#dashboard" class="nav-link"
+                    data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
+                <a href="#calculadora" class="nav-link"
+                    data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
             </div>
 
             <div class="nav-toggle" id="nav-toggle"><!--Boton de menu para dispositivos moviles-->
@@ -27,8 +46,25 @@
             </div>
         </div>
     </nav>
-
+    <section class="Inicio">
+        <div class="divSecUno">
+            <div class="divParr">
+                <h2>¿Qué es la energía geotérmica?</h2>
+                <p>La energía geotérmica es un tipo de energía más o menos renovable, de origen volcánico, es decir, que
+                    consiste en aprovechar el calor interno de la Tierra para extraer del subsuelo aguas a elevadas
+                    temperaturas, de la cual puede extraerse la energía calórica o que puede emplearse para generar
+                    electricidad.</p>
+            </div>
+            <div class="divVideo">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/RUhO7TBQ8MU?si=hOK6idZm2_bPsuRZ"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
 
 
 </body>
+
 </html>
