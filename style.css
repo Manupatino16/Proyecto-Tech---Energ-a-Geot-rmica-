@@ -1,0 +1,15 @@
+.titulillo {
+  text-align: center;
+}
+
+.parrIni {
+  text-align: justify;
+  margin: 0 15px 0 15px;
+}
+
+.divVideo {
+  margin: 0;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+}
