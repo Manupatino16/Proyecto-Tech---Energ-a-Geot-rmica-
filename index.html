@@ -6,50 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Hace que el sitio sea responsivo en dispositivos moviles-->
     <meta name="description" content="Sitio web sobre energia geotermica"><!--Descripcion del sitio web-->
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"><!--Enlace a la hoja de estilos de Bootstrap-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"><!--Enlace a la hoja de estilos CSS (carga después de Bootstrap) -->
+    <link rel="stylesheet" href="./Estilos/header.css"><!--Enlace a la hoja de estilos CSS para el header-->
+    <link rel="stylesheet" href="./Estilos/toggle.css"><!--Enlace a la hoja de estilos CSS para el toggle-->
+    <link rel="stylesheet" href="./Estilos/footer.css"><!--Enlace a la hoja de estilos CSS para el footer-->
     <title>GeoEnergy</title>
 
-<body><!--Etiqueta que contiene el contenido visible del documento-->
-    <!-- Navbar -->
-    <nav class="navbar"><!--Etiqueta de navegacion-->
-        <div class="nav-container"><!--Contenedor de la barra de navegacion-->
-            <div class="nav-logo"><!--Logo de la barra de navegacion-->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-volcano">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M9 8v-1a2 2 0 1 0 -4 0" />
-                    <path d="M15 8v-1a2 2 0 1 1 4 0" />
-                    <path d="M4 20l3.472 -7.812a2 2 0 0 1 1.828 -1.188h5.4a2 2 0 0 1 1.828 1.188l3.472 7.812" />
-                    <path
-                        d="M6.192 15.064a2.14 2.14 0 0 1 .475 -.064c.527 -.009 1.026 .178 1.333 .5c.307 .32 .806 .507 1.333 .5c.527 .007 1.026 -.18 1.334 -.5c.307 -.322 .806 -.509 1.333 -.5c.527 -.009 1.026 .178 1.333 .5c.308 .32 .807 .507 1.334 .5c.527 .007 1.026 -.18 1.333 -.5c.307 -.322 .806 -.509 1.333 -.5c.161 .003 .32 .025 .472 .064" />
-                    <path d="M12 8v-4" />
-                </svg><!--Icono SVG del logo-->
-                <span>GeoEnergy</span><!--Texto del logo-->
-            </div>
-
-            <div class="nav-menu" id="nav-menu"><!--Menu de navegacion-->
-                <a href="#inicio" class="nav-link active"
-                    data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
-                <a href="#dashboard" class="nav-link"
-                    data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
-                <a href="#calculadora" class="nav-link"
-                    data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
-            </div>
-
+<body class="site"><!--Etiqueta que contiene el contenido visible del documento-->
+    <header><!--Etiqueta que define el encabezado de la pagina-->
+        <h1><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"class="icon icon-tabler icons-tabler-outline icon-tabler-volcano"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 8v-1a2 2 0 1 0 -4 0" /><path d="M15 8v-1a2 2 0 1 1 4 0" /><path d="M4 20l3.472 -7.812a2 2 0 0 1 1.828 -1.188h5.4a2 2 0 0 1 1.828 1.188l3.472 7.812" /><path d="M6.192 15.064a2.14 2.14 0 0 1 .475 -.064c.527 -.009 1.026 .178 1.333 .5c.307 .32 .806 .507 1.333 .5c.527 .007 1.026 -.18 1.334 -.5c.307 -.322 .806 -.509 1.333 -.5c.527 -.009 1.026 .178 1.333 .5c.308 .32 .807 .507 1.334 .5c.527 .007 1.026 -.18 1.333 -.5c.307 -.322 .806 -.509 1.333 -.5c.161 .003 .32 .025 .472 .064" /><path d="M12 8v-4" /></svg>GeoEnergy</h1><!--ETIQUETA QUE DEFINE UN TITULO DE PRIMER NIVEL-->
+        <nav><!--Etiqueta que define una seccion de navegacion-->
+            <a href="#inicio" data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
+            <a href="#dashboard" data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
+            <a href="#calculadora" data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
             <div class="nav-toggle" id="nav-toggle"><!--Boton de menu para dispositivos moviles-->
                 <span class="bar"></span><!--Linea del boton de menu-->
                 <span class="bar"></span><!--Linea del boton de menu-->
                 <span class="bar"></span><!--Linea del boton de menu-->
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
+        
     <br><br>
     <section class="Inicio">
-        <div class="row">
-            <div class="col-6 ">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6">
                 <h2 class="titulillo">¿Qué es la energía geotérmica?</h2>
                 <p class="parrIni">La energía geotérmica es un tipo de energía más o menos renovable, de origen
                     volcánico, es decir, que
@@ -63,17 +49,57 @@
                     termales que, desde tiempos remotos, han sido aprovechados por la humanidad con diversos fines. Este
                     tipo de yacimientos son muy frecuentes en zonas de alta actividad volcánica.
                 </p>
-            </div>
-            <div class="divVideo col-6 ">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/RUhO7TBQ8MU?si=hOK6idZm2_bPsuRZ"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="divVideo col-12 col-md-6">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/RUhO7TBQ8MU?si=hOK6idZm2_bPsuRZ"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
 
-</body>
+    
+    
+    <footer class="site-footer mt-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 col-md-4 mb-3">
+                    <h5>Sobre GeoEnergy</h5>
+                    <p class="mb-0">Proyecto dedicado a divulgar y ofrecer herramientas sobre energía geotérmica. Recursos, calculadoras y datos técnicos para estudiantes y profesionales.</p>
+                </div>
+                <div class="col-6 col-md-2 mb-3">
+                    <h6>Enlaces</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#calculadora">Calculadora</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h6>Contacto</h6>
+                    <address class="mb-0">
+                        <div>GeoEnergy S.L.</div>
+                        <div>Email: <a href="mailto:info@geoenergy.example">info@geoenergy.example</a></div>
+                        <div>Tel: <a href="tel:+34123456789">+34 123 456 789</a></div>
+                    </address>
+                </div>
+                <div class="col-12 col-md-3 mb-3">
+                    <h6>Síguenos</h6>
+                    <div class="social d-flex gap-2">
+                        <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
+                        <a href="#" aria-label="LinkedIn" class="social-link">LinkedIn</a>
+                        <a href="#" aria-label="YouTube" class="social-link">YouTube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
+    <script src="script.js"></script>
+</body>
 </html>
