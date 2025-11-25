@@ -1,17 +1,17 @@
 let charts = {};// Almacenar instancias de gráficos
 
 // Función helper para obtener opciones de ejes responsivas
-function getResponsiveAxisOptions() {
-    const screenWidth = window.innerWidth;
-    const isMobile = screenWidth < 640;
-    const isTablet = screenWidth >= 640 && screenWidth < 1024;
+function getResponsiveAxisOptions() {// Función para opciones responsivas
+    const screenWidth = window.innerWidth;// ancho de pantalla
+    const isMobile = screenWidth < 640;// móvil
+    const isTablet = screenWidth >= 640 && screenWidth < 1024;// tablet
     
-    return {
-        xTickFont: isMobile ? 9 : (isTablet ? 10 : 11),
-        yTickFont: isMobile ? 8 : (isTablet ? 9 : 10),
-        titleFont: isMobile ? 9 : (isTablet ? 10 : 11),
-        maxRotation: isMobile ? 45 : (isTablet ? 30 : 0),
-        labelPadding: isMobile ? 3 : (isTablet ? 5 : 8)
+    return {// opciones basadas en tamaño
+        xTickFont: isMobile ? 9 : (isTablet ? 10 : 11),// tamaño fuente eje X
+        yTickFont: isMobile ? 8 : (isTablet ? 9 : 10),// tamaño fuente eje Y
+        titleFont: isMobile ? 9 : (isTablet ? 10 : 11),// tamaño fuente título
+        maxRotation: isMobile ? 45 : (isTablet ? 30 : 0),// rotación máxima etiquetas
+        labelPadding: isMobile ? 3 : (isTablet ? 5 : 8)// padding etiquetas
     };
 }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('js-enabled');// Indica que JS está activo
     
     // Inyectar CSS responsivo para gráficos
-    (function(){
+    (function(){// función autoejecutable
         const css = `
         /* Canvas debe ocupar todo su contenedor */
         .chart-container canvas {
@@ -29,62 +29,62 @@ document.addEventListener('DOMContentLoaded', function() {
             height: 100% !important;
             display: block !important;
         }
-        `;
-        const style = document.createElement('style');
-        style.setAttribute('data-injected','responsive-charts');
-        style.appendChild(document.createTextNode(css));
-        document.head.appendChild(style);
+        `;// CSS a inyectar
+        const style = document.createElement('style');// crear elemento style
+        style.setAttribute('data-injected','responsive-charts');// atributo identificador
+        style.appendChild(document.createTextNode(css));// agregar CSS
+        document.head.appendChild(style);// inyectar en head
     })();
     
-    initializeCharts();
+    initializeCharts();// Inicializar gráficos
     
     // Listener para redimensionamiento responsivo
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
+    let resizeTimeout;// temporizador para debounce
+    window.addEventListener('resize', function() {// manejar resize
+        clearTimeout(resizeTimeout);// limpiar temporizador previo
+        resizeTimeout = setTimeout(function() {// ejecutar tras retraso
             // Actualizar gráficos si es necesario
-            Object.values(charts).forEach(chart => {
-                if (chart && chart.resize) {
-                    chart.resize();
+            Object.values(charts).forEach(chart => {// iterar sobre gráficos
+                if (chart && chart.resize) {// si el gráfico existe y tiene método resize
+                    chart.resize();// llamar a resize
                 }
             });
-        }, 250);
+        }, 250);// retraso de 250ms
     });
 });
 
 // Mostrar sección específica
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.section');
-    sections.forEach(section => {
-        section.classList.remove('active');
+function showSection(sectionId) {// Función para mostrar sección
+    const sections = document.querySelectorAll('.section');// obtener todas las secciones
+    sections.forEach(section => {// iterar sobre secciones
+        section.classList.remove('active');// quitar clase active
     });
     
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active');
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    const targetSection = document.getElementById(sectionId);// obtener sección objetivo
+    if (targetSection) {// si la sección existe
+        targetSection.classList.add('active');// agregar clase active
+        window.scrollTo({// desplazar a la sección
+            top: 0,// al inicio
+            behavior: 'smooth'// desplazamiento suave
         });
     }
 }
 
 // Inicializar gráficos con datos geotérmicos
-function initializeCharts() {
-    const axisOpts = getResponsiveAxisOptions();
+function initializeCharts() {// Función para inicializar gráficos
+    const axisOpts = getResponsiveAxisOptions();// obtener opciones responsivas
     
     // Gráfico de barras - Producción por país
-    const barCtx = document.getElementById('barChart');
-    if (barCtx && !charts.barChart) {
-        charts.barChart = new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'],
-                datasets: [{
-                    label: 'Producción (TWh)',
-                    data: [18.8, 14.2, 10.3, 6.1, 7.9, 5.2],
-                    backgroundColor: [
+    const barCtx = document.getElementById('barChart');//
+    if (barCtx && !charts.barChart) {// si el canvas existe y no hay gráfico creado
+        charts.barChart = new Chart(barCtx, {// crear nuevo gráfico
+            type: 'bar',// tipo de gráfico
+            data: {// datos del gráfico
+                labels: ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'],// etiquetas de países
+                datasets: [{// conjunto de datos
+                    label: 'Producción (TWh)',// etiqueta del conjunto
+                    data: [18.8, 14.2, 10.3, 6.1, 7.9, 5.2],// datos de producción
+                    backgroundColor: [// colores de barras
                         'rgba(210, 105, 30, 0.8)',
                         'rgba(255, 99, 71, 0.8)',
                         'rgba(255, 165, 0, 0.8)',
@@ -92,7 +92,7 @@ function initializeCharts() {
                         'rgba(139, 69, 19, 0.8)',
                         'rgba(205, 133, 63, 0.8)'
                     ],
-                    borderColor: [
+                    borderColor: [// colores de borde
                         'rgba(210, 105, 30, 1)',
                         'rgba(255, 99, 71, 1)',
                         'rgba(255, 165, 0, 1)',
@@ -100,93 +100,93 @@ function initializeCharts() {
                         'rgba(139, 69, 19, 1)',
                         'rgba(205, 133, 63, 1)'
                     ],
-                    borderWidth: 2,
-                    borderRadius: 4
+                    borderWidth: 2,// ancho del borde
+                    borderRadius: 4// redondeo de bordes
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 750,
-                    easing: 'easeInOutQuart'
+            options: {// opciones del gráfico
+                responsive: true,// gráfico responsivo
+                maintainAspectRatio: false,// no mantener proporción
+                animation: {// animación al cargar
+                    duration: 750,// duración en ms
+                    easing: 'easeInOutQuart'// tipo de easing
                 },
-                plugins: {
-                    legend: {
-                        display: false
+                plugins: {// opciones de plugins
+                    legend: {// leyenda
+                        display: false// no mostrar leyenda
                     },
-                    tooltip: {
-                        backgroundColor: 'rgba(0,0,0,0.9)',
-                        padding: 12,
-                        borderColor: 'rgba(210, 105, 30, 1)',
-                        borderWidth: 2,
-                        titleFont: {
-                            size: axisOpts.titleFont + 2,
-                            weight: 'bold'
+                    tooltip: {// tooltip personalizado
+                        backgroundColor: 'rgba(0,0,0,0.9)',// fondo del tooltip
+                        padding: 12,// padding interno
+                        borderColor: 'rgba(210, 105, 30, 1)',// color del borde
+                        borderWidth: 2,// ancho del borde
+                        titleFont: {// fuente del título
+                            size: axisOpts.titleFont + 2,// tamaño del título
+                            weight: 'bold'// negrita
                         },
-                        bodyFont: {
-                            size: axisOpts.titleFont
+                        bodyFont: {// fuente del cuerpo
+                            size: axisOpts.titleFont// tamaño del cuerpo
                         },
-                        callbacks: {
-                            label: function(context) {
-                                return 'Producción: ' + context.parsed.y.toFixed(1) + ' TWh';
+                        callbacks: {// callbacks para personalizar contenido
+                            label: function(context) {// función para etiqueta
+                                return 'Producción: ' + context.parsed.y.toFixed(1) + ' TWh';// formato de la etiqueta
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
+                scales: {// configuración de escalas
+                    x: {// eje X
+                        grid: {//
+                            display: false// no mostrar líneas de cuadrícula
                         },
-                        ticks: {
-                            font: {
-                                size: axisOpts.xTickFont,
-                                weight: 'bold',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        ticks: {// ticks del eje X
+                            font: {// fuente de los ticks
+                                size: axisOpts.xTickFont,// tamaño de fuente
+                                weight: 'bold',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(242, 235, 226, 1)',
-                            maxRotation: axisOpts.maxRotation,
-                            minRotation: 0,
-                            padding: axisOpts.labelPadding,
-                            autoSkip: false,
-                            callback: function(value, index, values) {
-                                const labels = ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'];
-                                const label = labels[index];
-                                if (window.innerWidth < 640 && label && label.length > 12) {
-                                    return label.substring(0, 9) + '...';
-                                } else if (window.innerWidth < 1024 && label && label.length > 14) {
-                                    return label.substring(0, 11) + '...';
+                            color: 'rgba(242, 235, 226, 1)',// color de los ticks
+                            maxRotation: axisOpts.maxRotation,// rotación máxima
+                            minRotation: 0,// rotación mínima
+                            padding: axisOpts.labelPadding,// padding de las etiquetas
+                            autoSkip: false,// no omitir etiquetas automáticamente
+                            callback: function(value, index, values) {// función para formatear etiquetas
+                                const labels = ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'];// etiquetas originales
+                                const label = labels[index];// obtener etiqueta actual
+                                if (window.innerWidth < 640 && label && label.length > 12) {// en móviles
+                                    return label.substring(0, 9) + '...';// truncar etiqueta larga
+                                } else if (window.innerWidth < 1024 && label && label.length > 14) {//
+                                    return label.substring(0, 11) + '...';// truncar etiqueta larga
                                 }
-                                return label;
+                                return label;// devolver etiqueta completa
                             }
                         }
                     },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)',
-                            drawBorder: false
+                    y: {// eje Y
+                        beginAtZero: true,// comenzar en cero
+                        grid: {// configuración de la cuadrícula
+                            color: 'rgba(255, 255, 255, 0.1)',// color de las líneas
+                            drawBorder: false// no dibujar borde
                         },
-                        ticks: {
-                            font: {
-                                size: axisOpts.yTickFont,
-                                weight: '500',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        ticks: {// ticks del eje Y
+                            font: {// fuente de los ticks
+                                size: axisOpts.yTickFont,// tamaño de fuente
+                                weight: '500',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(242, 235, 226, 1)',
-                            padding: 10
+                            color: 'rgba(242, 235, 226, 1)',// color de los ticks
+                            padding: 10// padding de las etiquetas
                         },
-                        title: {
-                            display: true,
-                            text: 'TWh',
-                            font: {
-                                size: axisOpts.titleFont,
-                                weight: 'bold',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        title: {// título del eje Y
+                            display: true,// mostrar título
+                            text: 'TWh',// texto del título
+                            font: {// fuente del título
+                                size: axisOpts.titleFont,// tamaño de fuente
+                                weight: 'bold',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(210, 105, 30, 1)',
-                            padding: 10
+                            color: 'rgba(210, 105, 30, 1)',// color del título
+                            padding: 10// padding del título
                         }
                     }
                 }
@@ -195,69 +195,69 @@ function initializeCharts() {
     }
 
     // Gráfico de torta - Tipos de sistemas geotérmicos
-    const pieCtx = document.getElementById('pieChart');
-    if (pieCtx && !charts.pieChart) {
-        charts.pieChart = new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: ['Vapor Seco', 'Vapor Flash', 'Ciclo Binario', 'Sistemas Híbridos', 'Otros'],
-                datasets: [{
-                    data: [45, 32, 18, 3, 2],
-                    backgroundColor: [
+    const pieCtx = document.getElementById('pieChart');// obtener canvas
+    if (pieCtx && !charts.pieChart) {// si el canvas existe y no hay gráfico creado
+        charts.pieChart = new Chart(pieCtx, {// crear nuevo gráfico
+            type: 'pie',// tipo de gráfico
+            data: {// datos del gráfico
+                labels: ['Vapor Seco', 'Vapor Flash', 'Ciclo Binario', 'Sistemas Híbridos', 'Otros'],// etiquetas
+                datasets: [{// conjunto de datos
+                    data: [45, 32, 18, 3, 2],// datos porcentuales
+                    backgroundColor: [// colores de secciones
                         'rgba(210, 105, 30, 0.8)',
                         'rgba(255, 99, 71, 0.8)',
                         'rgba(255, 165, 0, 0.8)',
                         'rgba(255, 140, 0, 0.8)',
                         'rgba(139, 69, 19, 0.8)'
                     ],
-                    borderColor: [
+                    borderColor: [// colores de bordes
                         'rgba(210, 105, 30, 1)',
                         'rgba(255, 99, 71, 1)',
                         'rgba(255, 165, 0, 1)',
                         'rgba(255, 140, 0, 1)',
                         'rgba(139, 69, 19, 1)'
                     ],
-                    borderWidth: 2
+                    borderWidth: 2// ancho de bordes
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 800,
-                    easing: 'easeInOutQuart'
+            options: {// opciones del gráfico
+                responsive: true,// gráfico responsivo
+                maintainAspectRatio: false,// no mantener proporción
+                animation: {// animación al cargar
+                    duration: 800,// duración en ms
+                    easing: 'easeInOutQuart'// tipo de easing
                 },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: window.innerWidth < 640 ? 'bottom' : 'right',
-                        labels: {
-                            font: {
-                                size: axisOpts.xTickFont,
-                                weight: 'bold',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                plugins: {// opciones de plugins
+                    legend: {// leyenda
+                        display: true,// mostrar leyenda
+                        position: window.innerWidth < 640 ? 'bottom' : 'right',// posición responsiva
+                        labels: {// opciones de etiquetas
+                            font: {// fuente de las etiquetas
+                                size: axisOpts.xTickFont,// tamaño de fuente
+                                weight: 'bold',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(242, 235, 226, 1)',
-                            padding: window.innerWidth < 640 ? 8 : 15,
-                            usePointStyle: true,
-                            pointStyle: 'circle'
+                            color: 'rgba(242, 235, 226, 1)',// color de las etiquetas
+                            padding: window.innerWidth < 640 ? 8 : 15,// padding responsivo
+                            usePointStyle: true,// usar estilo de punto
+                            pointStyle: 'circle'// estilo de punto
                         }
                     },
-                    tooltip: {
-                        backgroundColor: 'rgba(0,0,0,0.9)',
-                        padding: 12,
-                        borderColor: 'rgba(210, 105, 30, 1)',
-                        borderWidth: 2,
-                        titleFont: {
-                            size: axisOpts.titleFont + 2,
-                            weight: 'bold'
+                    tooltip: {// tooltip personalizado
+                        backgroundColor: 'rgba(0,0,0,0.9)',// fondo del tooltip
+                        padding: 12,// padding interno
+                        borderColor: 'rgba(210, 105, 30, 1)',// color del borde
+                        borderWidth: 2,// ancho del borde
+                        titleFont: {// fuente del título
+                            size: axisOpts.titleFont + 2,// tamaño del título
+                            weight: 'bold'//negrita
                         },
-                        bodyFont: {
-                            size: axisOpts.titleFont
+                        bodyFont: {// fuente del cuerpo
+                            size: axisOpts.titleFont// tamaño del cuerpo
                         },
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': ' + context.parsed + '%';
+                        callbacks: {// callbacks para personalizar contenido
+                            label: function(context) {// función para etiqueta
+                                return context.label + ': ' + context.parsed + '%';// formato de la etiqueta
                             }
                         }
                     }
@@ -267,112 +267,112 @@ function initializeCharts() {
     }
 
     // Gráfico de líneas - Evolución de capacidad geotérmica
-    const lineCtx = document.getElementById('lineChart');
-    if (lineCtx && !charts.lineChart) {
-        charts.lineChart = new Chart(lineCtx, {
-            type: 'line',
-            data: {
-                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-                datasets: [{
-                    label: 'Capacidad Instalada (GW)',
-                    data: [13.3, 13.9, 14.1, 14.8, 15.2, 15.9, 16.4],
-                    borderColor: 'rgba(210, 105, 30, 1)',
-                    backgroundColor: 'rgba(210, 105, 30, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: window.innerWidth < 640 ? 4 : 5,
-                    pointBackgroundColor: 'rgba(210, 105, 30, 1)',
-                    pointBorderColor: 'rgba(255, 255, 255, 1)',
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 7
+    const lineCtx = document.getElementById('lineChart');// obtener canvas
+    if (lineCtx && !charts.lineChart) {// si el canvas existe y no hay gráfico creado
+        charts.lineChart = new Chart(lineCtx, {// crear nuevo gráfico
+            type: 'line',// tipo de gráfico
+            data: {// datos del gráfico
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],// etiquetas de años
+                datasets: [{// conjunto de datos
+                    label: 'Capacidad Instalada (GW)',// etiqueta del conjunto
+                    data: [13.3, 13.9, 14.1, 14.8, 15.2, 15.9, 16.4],// datos de capacidad
+                    borderColor: 'rgba(210, 105, 30, 1)',// color de la línea
+                    backgroundColor: 'rgba(210, 105, 30, 0.1)',// color del área bajo la línea
+                    borderWidth: 3,// ancho de la línea
+                    fill: true,// llenar área bajo la línea
+                    tension: 0.4,// curvatura de la línea
+                    pointRadius: window.innerWidth < 640 ? 4 : 5,// tamaño de los puntos responsivo
+                    pointBackgroundColor: 'rgba(210, 105, 30, 1)',// color de los puntos
+                    pointBorderColor: 'rgba(255, 255, 255, 1)',// color del borde de los puntos
+                    pointBorderWidth: 2,// ancho del borde de los puntos
+                    pointHoverRadius: 7// tamaño del punto al pasar el cursor
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: {
-                    duration: 900,
-                    easing: 'easeInOutQuart'
+            options: {// opciones del gráfico
+                responsive: true,// gráfico responsivo
+                maintainAspectRatio: false,// no mantener proporción
+                animation: {// animación al cargar
+                    duration: 900,// duración en ms
+                    easing: 'easeInOutQuart'// tipo de easing
                 },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
+                interaction: {// interacción del cursor
+                    intersect: false,// no requerir intersección
+                    mode: 'index'// modo de interacción
                 },
-                plugins: {
-                    legend: {
-                        display: false
+                plugins: {// opciones de plugins
+                    legend: {// leyenda
+                        display: false// no mostrar leyenda
                     },
-                    tooltip: {
-                        backgroundColor: 'rgba(0,0,0,0.9)',
-                        padding: 12,
-                        borderColor: 'rgba(210, 105, 30, 1)',
-                        borderWidth: 2,
-                        titleFont: {
-                            size: axisOpts.titleFont + 2,
-                            weight: 'bold'
+                    tooltip: {// tooltip personalizado
+                        backgroundColor: 'rgba(0,0,0,0.9)',// fondo del tooltip
+                        padding: 12,// padding interno
+                        borderColor: 'rgba(210, 105, 30, 1)',// color del borde
+                        borderWidth: 2,// ancho del borde
+                        titleFont: {// fuente del título
+                            size: axisOpts.titleFont + 2,// tamaño del título
+                            weight: 'bold'// negrita
                         },
-                        bodyFont: {
-                            size: axisOpts.titleFont
+                        bodyFont: {// fuente del cuerpo
+                            size: axisOpts.titleFont// tamaño del cuerpo
                         },
-                        callbacks: {
-                            label: function(context) {
-                                return 'Capacidad: ' + context.parsed.y.toFixed(1) + ' GW';
+                        callbacks: {// callbacks para personalizar contenido
+                            label: function(context) {// función para etiqueta
+                                return 'Capacidad: ' + context.parsed.y.toFixed(1) + ' GW';// formato de la etiqueta
                             }
                         }
                     }
                 },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
+                scales: {// configuración de escalas
+                    x: {// eje X
+                        grid: {//grilla
+                            display: false// no mostrar líneas de cuadrícula
                         },
-                        ticks: {
-                            font: {
-                                size: axisOpts.xTickFont,
-                                weight: 'bold',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        ticks: {// ticks del eje X
+                            font: {// fuente de los ticks
+                                size: axisOpts.xTickFont,// tamaño de fuente
+                                weight: 'bold',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(242, 235, 226, 1)',
-                            padding: axisOpts.labelPadding
+                            color: 'rgba(242, 235, 226, 1)',// color de los ticks
+                            padding: axisOpts.labelPadding// padding de las etiquetas
                         },
-                        title: {
-                            display: true,
-                            text: 'Año',
-                            font: {
-                                size: axisOpts.titleFont,
-                                weight: 'bold',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        title: {// título del eje X
+                            display: true,// mostrar título
+                            text: 'Año',// texto del título
+                            font: {// fuente del título
+                                size: axisOpts.titleFont,// tamaño de fuente
+                                weight: 'bold',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(210, 105, 30, 1)',
-                            padding: 10
+                            color: 'rgba(210, 105, 30, 1)',// color del título
+                            padding: 10// padding del título
                         }
                     },
-                    y: {
-                        beginAtZero: false,
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)',
-                            drawBorder: false
+                    y: {// eje Y
+                        beginAtZero: false,// no comenzar en cero
+                        grid: {// configuración de la cuadrícula
+                            color: 'rgba(255, 255, 255, 0.1)',// color de las líneas
+                            drawBorder: false// no dibujar borde
                         },
-                        ticks: {
-                            font: {
-                                size: axisOpts.yTickFont,
-                                weight: '500',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        ticks: {// ticks del eje Y
+                            font: {// fuente de los ticks
+                                size: axisOpts.yTickFont,// tamaño de fuente
+                                weight: '500',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(242, 235, 226, 1)',
-                            padding: 10
+                            color: 'rgba(242, 235, 226, 1)',// color de los ticks
+                            padding: 10// padding de las etiquetas
                         },
-                        title: {
-                            display: true,
-                            text: 'GW',
-                            font: {
-                                size: axisOpts.titleFont,
-                                weight: 'bold',
-                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                        title: {// título del eje Y
+                            display: true,// mostrar título
+                            text: 'GW',// texto del título
+                            font: {// fuente del título
+                                size: axisOpts.titleFont,// tamaño de fuente
+                                weight: 'bold',// peso de fuente
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"// familia de fuente
                             },
-                            color: 'rgba(210, 105, 30, 1)',
-                            padding: 10
+                            color: 'rgba(210, 105, 30, 1)',// color del título
+                            padding: 10// padding del título
                         }
                     }
                 }

@@ -9,8 +9,8 @@
   --border: #3B3C36;/* Color de borde */
   --shadow: #3b3c36;/* Sombra */
   --background-secondary: #2a2a24;/* Fondo secundario */
-  --border-radius: 12px;
-  --shadow-hover: 0 10px 30px rgba(0,0,0,0.25);
+  --border-radius: 12px;/* Radio de borde */
+  --shadow-hover: 0 10px 30px rgba(0,0,0,0.25);/* Sombra al pasar el ratón */
 }
 
 /* Dashboard - Responsive Stats Grid */
