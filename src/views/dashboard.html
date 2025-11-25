@@ -24,7 +24,7 @@
         <nav><!--Etiqueta que define una seccion de navegacion-->
             <a href="../../index.html" data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
             <a href="./dashboard.html" data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
-            <a href="#calculadora" data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
+            <a href="../views/calculadora.html" data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
             <div class="nav-toggle" id="nav-toggle"><!--Boton de menu para dispositivos moviles-->
                 <span class="bar"></span><!--Linea del boton de menu-->
                 <span class="bar"></span><!--Linea del boton de menu-->
@@ -34,66 +34,66 @@
     </header>
 
     <!-- Sección Dashboard -->
-    <section id="dashboard" class="section">
-        <div class="container">
-            <h2 class="section-title">Dashboard de Energía Geotérmica</h2>
+    <section id="dashboard" class="section"><!--Etiqueta que define una seccion de la pagina-->
+        <div class="container"><!--Contenedor principal-->
+            <h2 class="section-title">Dashboard de Energía Geotérmica</h2><!--Titulo de la seccion-->
             
             <!-- Estadísticas Principales -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-bolt"></i>
+            <div class="stats-grid"><!--Contenedor de estadisticas-->
+                <div class="stat-card"><!--Tarjeta de estadistica-->
+                    <div class="stat-icon"><!--Icono de estadistica-->
+                        <i class="fas fa-bolt"></i><!--Icono de rayo-->
                     </div>
-                    <div class="stat-info">
-                        <h3>95.2 TWh</h3>
-                        <p>Producción Global Anual</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-globe-americas"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>1.5%</h3>
-                        <p>Del Consumo Mundial</p>
+                    <div class="stat-info"><!--Informacion de estadistica-->
+                        <h3>95.2 TWh</h3><!--Valor de estadistica-->
+                        <p>Producción Global Anual</p><!--Descripcion de estadistica-->
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-thermometer-half"></i>
+                <div class="stat-card"><!--Tarjeta de estadistica-->
+                    <div class="stat-icon"><!--Icono de estadistica-->
+                        <i class="fas fa-globe-americas"></i><!--Icono de globo-->
                     </div>
-                    <div class="stat-info">
-                        <h3>15.9 GW</h3>
-                        <p>Capacidad Instalada</p>
+                    <div class="stat-info"><!--Informacion de estadistica-->
+                        <h3>1.5%</h3><!--Valor de estadistica-->
+                        <p>Del Consumo Mundial</p><!--Descripcion de estadistica-->
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+                <div class="stat-card"><!--Tarjeta de estadistica-->
+                    <div class="stat-icon"><!--Icono de estadistica-->
+                        <i class="fas fa-thermometer-half"></i><!--Icono de termometro-->
                     </div>
-                    <div class="stat-info">
-                        <h3>1.8M</h3>
-                        <p>Empleos Generados</p>
+                    <div class="stat-info"><!--Informacion de estadistica-->
+                        <h3>15.9 GW</h3><!--Valor de estadistica-->
+                        <p>Capacidad Instalada</p><!--Descripcion de estadistica-->
+                    </div>
+                </div>
+                <div class="stat-card"><!--Tarjeta de estadistica-->
+                    <div class="stat-icon"><!--Icono de estadistica-->
+                        <i class="fas fa-users"></i><!--Icono de usuarios-->
+                    </div>
+                    <div class="stat-info"><!--Informacion de estadistica-->
+                        <h3>1.8M</h3><!--Valor de estadistica-->
+                        <p>Empleos Generados</p><!--Descripcion de estadistica-->
                     </div>
                 </div>
             </div>
 
             <!-- Gráficos -->
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <h3>Producción de Energía por País (TWh)</h3>
-                    <canvas id="barChart"></canvas>
+            <div class="charts-grid"><!--Contenedor de graficos-->
+                <div class="chart-container"><!--Contenedor de grafico-->
+                    <h3>Producción de Energía por País (TWh)</h3><!--Titulo del grafico-->
+                    <canvas id="barChart"></canvas><!--Canvas para el grafico de barras-->
                 </div>
-                <div class="chart-container">
-                    <h3>Distribución por Tipo de Sistema</h3>
-                    <canvas id="pieChart"></canvas>
+                <div class="chart-container"><!--Contenedor de grafico-->
+                    <h3>Distribución por Tipo de Sistema</h3><!--Titulo del grafico-->
+                    <canvas id="pieChart"></canvas><!--Canvas para el grafico de torta-->
                 </div>
             </div>
 
             <!-- Gráfico de Líneas -->
-            <div class="chart-container full-width">
-                <h3>Evolución de la Capacidad Geotérmica (2018-2024)</h3>
-                <canvas id="lineChart"></canvas>
+            <div class="chart-container full-width"><!--Contenedor de grafico de ancho completo-->
+                <h3>Evolución de la Capacidad Geotérmica (2018-2024)</h3><!--Titulo del grafico-->
+                <canvas id="lineChart"></canvas><!--Canvas para el grafico de lineas-->
             </div>
         </div>
     </section>
@@ -101,35 +101,35 @@
 
 
 
-    <footer class="site-footer mt-5">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                    <h5>Sobre GeoEnergy</h5>
-                    <p class="mb-0">Proyecto dedicado a divulgar y ofrecer herramientas sobre energía geotérmica. Recursos, calculadoras y datos técnicos para estudiantes y profesionales.</p>
+    <footer class="site-footer mt-5"><!--Etiqueta que define el pie de pagina-->
+        <div class="container py-5"><!--Contenedor principal del footer-->
+            <div class="row"><!--Fila del footer-->
+                <div class="col-12 col-md-4 mb-3"><!--Columna del footer-->
+                    <h5>Sobre GeoEnergy</h5><!--Titulo de la seccion-->
+                    <p class="mb-0">Proyecto dedicado a divulgar y ofrecer herramientas sobre energía geotérmica. Recursos, calculadoras y datos técnicos para estudiantes y profesionales.</p><!--Descripcion del sitio-->
                 </div>
-                <div class="col-6 col-md-2 mb-3">
-                    <h6>Enlaces</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#dashboard">Dashboard</a></li>
-                        <li><a href="#calculadora">Calculadora</a></li>
+                <div class="col-6 col-md-2 mb-3"><!--Columna del footer-->
+                    <h6>Enlaces</h6><!--Titulo de la seccion-->
+                    <ul class="list-unstyled"><!--Lista de enlaces-->
+                        <li><a href="#inicio">Inicio</a></li><!--Enlace a la seccion de inicio-->
+                        <li><a href="#dashboard">Dashboard</a></li><!--Enlace a la seccion de dashboard-->
+                        <li><a href="#calculadora">Calculadora</a></li><!--Enlace a la seccion de calculadora-->
                     </ul>
                 </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <h6>Contacto</h6>
-                    <address class="mb-0">
-                        <div>GeoEnergy S.L.</div>
-                        <div>Email: <a href="mailto:info@geoenergy.example">info@geoenergy.example</a></div>
-                        <div>Tel: <a href="tel:+34123456789">+34 123 456 789</a></div>
+                <div class="col-6 col-md-3 mb-3"><!--Columna del footer-->
+                    <h6>Contacto</h6><!--Titulo de la seccion-->
+                    <address class="mb-0"><!--Direccion de contacto-->
+                        <div>GeoEnergy S.L.</div><!--Nombre de la empresa-->
+                        <div>Email: <a href="mailto:info@geoenergy.example">info@geoenergy.example</a></div><!--Email de contacto-->
+                        <div>Tel: <a href="tel:+34123456789">+34 123 456 789</a></div><!--Telefono de contacto-->
                     </address>
                 </div>
-                <div class="col-12 col-md-3 mb-3">
-                    <h6>Síguenos</h6>
-                    <div class="social d-flex gap-2">
-                        <a href="#" aria-label="Twitter" class="social-link">Twitter</a>
-                        <a href="#" aria-label="LinkedIn" class="social-link">LinkedIn</a>
-                        <a href="#" aria-label="YouTube" class="social-link">YouTube</a>
+                <div class="col-12 col-md-3 mb-3"><!--Columna del footer-->
+                    <h6>Síguenos</h6><!--Titulo de la seccion-->
+                    <div class="social d-flex gap-2"><!--Contenedor de enlaces sociales-->
+                        <a href="#" aria-label="Twitter" class="social-link">Twitter</a><!--Enlace a Twitter-->
+                        <a href="#" aria-label="LinkedIn" class="social-link">LinkedIn</a><!--Enlace a LinkedIn-->
+                        <a href="#" aria-label="YouTube" class="social-link">YouTube</a><!--Enlace a YouTube-->
                     </div>
                 </div>
             </div>

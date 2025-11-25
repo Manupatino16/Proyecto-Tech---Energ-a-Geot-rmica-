@@ -1,44 +1,58 @@
 let charts = {};// Almacenar instancias de gráficos
 
+// Función helper para obtener opciones de ejes responsivas
+function getResponsiveAxisOptions() {
+    const screenWidth = window.innerWidth;
+    const isMobile = screenWidth < 640;
+    const isTablet = screenWidth >= 640 && screenWidth < 1024;
+    
+    return {
+        xTickFont: isMobile ? 9 : (isTablet ? 10 : 11),
+        yTickFont: isMobile ? 8 : (isTablet ? 9 : 10),
+        titleFont: isMobile ? 9 : (isTablet ? 10 : 11),
+        maxRotation: isMobile ? 45 : (isTablet ? 30 : 0),
+        labelPadding: isMobile ? 3 : (isTablet ? 5 : 8)
+    };
+}
+
 // Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     // Agregar clase para habilitar JavaScript
     document.body.classList.add('js-enabled');// Indica que JS está activo
-    // Inyectar CSS responsivo para limitar la altura de los gráficos
-    (function(){// Inyectar CSS para gráficos responsivos
+    
+    // Inyectar CSS responsivo para gráficos
+    (function(){
         const css = `
-        /* Contenedor responsivo para gráficos */
-        .chart-container {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            max-height: 480px;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            display: block;
-        }
-        /* Forzar canvas a ocupar el contenedor sin estirarse fuera */
+        /* Canvas debe ocupar todo su contenedor */
         .chart-container canvas {
             width: 100% !important;
             height: 100% !important;
-            display: block;
-        }
-        @media (max-width: 768px) {
-            .chart-container {
-                max-height: 320px;
-                aspect-ratio: 16/10;
-                padding: 0 12px;
-            }
+            display: block !important;
         }
         `;
-        const style = document.createElement('style');// Crear elemento style
-        style.setAttribute('data-injected','responsive-charts');// Marcar como inyectado
-        style.appendChild(document.createTextNode(css));// Agregar CSS
-        document.head.appendChild(style);// Inyectar en head
+        const style = document.createElement('style');
+        style.setAttribute('data-injected','responsive-charts');
+        style.appendChild(document.createTextNode(css));
+        document.head.appendChild(style);
     })();
     
-    initializeCharts();// Inicializar gráficos
+    initializeCharts();
+    
+    // Listener para redimensionamiento responsivo
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            // Actualizar gráficos si es necesario
+            Object.values(charts).forEach(chart => {
+                if (chart && chart.resize) {
+                    chart.resize();
+                }
+            });
+        }, 250);
+    });
 });
+
 // Mostrar sección específica
 function showSection(sectionId) {
     const sections = document.querySelectorAll('.section');
@@ -49,8 +63,6 @@ function showSection(sectionId) {
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
         targetSection.classList.add('active');
-        
-        // Scroll suave al inicio
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -60,6 +72,8 @@ function showSection(sectionId) {
 
 // Inicializar gráficos con datos geotérmicos
 function initializeCharts() {
+    const axisOpts = getResponsiveAxisOptions();
+    
     // Gráfico de barras - Producción por país
     const barCtx = document.getElementById('barChart');
     if (barCtx && !charts.barChart) {
@@ -86,24 +100,93 @@ function initializeCharts() {
                         'rgba(139, 69, 19, 1)',
                         'rgba(205, 133, 63, 1)'
                     ],
-                    borderWidth: 2
+                    borderWidth: 2,
+                    borderRadius: 4
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                aspectRatio: 1.8,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 750,
+                    easing: 'easeInOutQuart'
+                },
                 plugins: {
                     legend: {
                         display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.9)',
+                        padding: 12,
+                        borderColor: 'rgba(210, 105, 30, 1)',
+                        borderWidth: 2,
+                        titleFont: {
+                            size: axisOpts.titleFont + 2,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: axisOpts.titleFont
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return 'Producción: ' + context.parsed.y.toFixed(1) + ' TWh';
+                            }
+                        }
                     }
                 },
                 scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: axisOpts.xTickFont,
+                                weight: 'bold',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(242, 235, 226, 1)',
+                            maxRotation: axisOpts.maxRotation,
+                            minRotation: 0,
+                            padding: axisOpts.labelPadding,
+                            autoSkip: false,
+                            callback: function(value, index, values) {
+                                const labels = ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'];
+                                const label = labels[index];
+                                if (window.innerWidth < 640 && label && label.length > 12) {
+                                    return label.substring(0, 9) + '...';
+                                } else if (window.innerWidth < 1024 && label && label.length > 14) {
+                                    return label.substring(0, 11) + '...';
+                                }
+                                return label;
+                            }
+                        }
+                    },
                     y: {
                         beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: axisOpts.yTickFont,
+                                weight: '500',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(242, 235, 226, 1)',
+                            padding: 10
+                        },
                         title: {
                             display: true,
-                            text: 'TWh'
+                            text: 'TWh',
+                            font: {
+                                size: axisOpts.titleFont,
+                                weight: 'bold',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(210, 105, 30, 1)',
+                            padding: 10
                         }
                     }
                 }
@@ -140,9 +223,43 @@ function initializeCharts() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 800,
+                    easing: 'easeInOutQuart'
+                },
                 plugins: {
                     legend: {
-                        position: 'bottom'
+                        display: true,
+                        position: window.innerWidth < 640 ? 'bottom' : 'right',
+                        labels: {
+                            font: {
+                                size: axisOpts.xTickFont,
+                                weight: 'bold',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(242, 235, 226, 1)',
+                            padding: window.innerWidth < 640 ? 8 : 15,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.9)',
+                        padding: 12,
+                        borderColor: 'rgba(210, 105, 30, 1)',
+                        borderWidth: 2,
+                        titleFont: {
+                            size: axisOpts.titleFont + 2,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: axisOpts.titleFont
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
                     }
                 }
             }
@@ -163,30 +280,99 @@ function initializeCharts() {
                     backgroundColor: 'rgba(210, 105, 30, 0.1)',
                     borderWidth: 3,
                     fill: true,
-                    tension: 0.4
+                    tension: 0.4,
+                    pointRadius: window.innerWidth < 640 ? 4 : 5,
+                    pointBackgroundColor: 'rgba(210, 105, 30, 1)',
+                    pointBorderColor: 'rgba(255, 255, 255, 1)',
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 7
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                aspectRatio: 2.0,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 900,
+                    easing: 'easeInOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
                 plugins: {
                     legend: {
                         display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.9)',
+                        padding: 12,
+                        borderColor: 'rgba(210, 105, 30, 1)',
+                        borderWidth: 2,
+                        titleFont: {
+                            size: axisOpts.titleFont + 2,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: axisOpts.titleFont
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return 'Capacidad: ' + context.parsed.y.toFixed(1) + ' GW';
+                            }
+                        }
                     }
                 },
                 scales: {
-                    y: {
-                        beginAtZero: false,
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                size: axisOpts.xTickFont,
+                                weight: 'bold',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(242, 235, 226, 1)',
+                            padding: axisOpts.labelPadding
+                        },
                         title: {
                             display: true,
-                            text: 'GW'
+                            text: 'Año',
+                            font: {
+                                size: axisOpts.titleFont,
+                                weight: 'bold',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(210, 105, 30, 1)',
+                            padding: 10
                         }
                     },
-                    x: {
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: axisOpts.yTickFont,
+                                weight: '500',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(242, 235, 226, 1)',
+                            padding: 10
+                        },
                         title: {
                             display: true,
-                            text: 'Año'
+                            text: 'GW',
+                            font: {
+                                size: axisOpts.titleFont,
+                                weight: 'bold',
+                                family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+                            },
+                            color: 'rgba(210, 105, 30, 1)',
+                            padding: 10
                         }
                     }
                 }

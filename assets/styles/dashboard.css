@@ -65,32 +65,94 @@
 /* Gráficos - Responsive Charts */
 .charts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: clamp(20px, 4vw, 30px);
     margin-bottom: 40px;
 }
 
 .chart-container {
     background: var(--background-secondary);
-    padding: clamp(20px, 4vw, 30px);
+    padding: clamp(15px, 3vw, 25px);
     border-radius: var(--border-radius);
-    box-shadow: var(--primary-dark);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     width: 100%;
-    min-height: 400px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+    box-shadow: 0 6px 12px rgba(210, 105, 30, 0.2);
 }
 
 .chart-container.full-width {
     grid-column: 1 / -1;
+    height: 400px;
 }
 
 .chart-container h3 {
     color: var(--primary-light);
-    margin-bottom: 20px;
+    margin: 0 0 15px 0;
     text-align: center;
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    flex-shrink: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .chart-container canvas {
-    max-width: 100%;
-    height: auto !important;
+    flex: 1;
+    min-height: 250px;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 640px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(15px, 3vw, 20px);
+    }
+    
+    .chart-container {
+        height: 380px;
+        padding: clamp(12px, 2vw, 18px);
+    }
+    
+    .chart-container.full-width {
+        height: 400px;
+    }
+    
+    .chart-container h3 {
+        margin-bottom: 12px;
+        font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    }
+}
+
+/* Responsive para pantallas medianas */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .chart-container {
+        height: 380px;
+    }
+    
+    .chart-container.full-width {
+        height: 400px;
+    }
+}
+
+/* Responsive para pantallas grandes */
+@media (min-width: 1025px) {
+    .charts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .chart-container {
+        height: 380px;
+    }
+    
+    .chart-container.full-width {
+        height: 400px;
+    }
 }

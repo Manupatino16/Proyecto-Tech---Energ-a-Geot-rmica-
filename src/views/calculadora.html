@@ -11,19 +11,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/styles/style.css"><!--Enlace a la hoja de estilos CSS (carga después de Bootstrap) -->
-    <link rel="stylesheet" href="./assets/styles/header.css"><!--Enlace a la hoja de estilos CSS para el header-->
-    <link rel="stylesheet" href="./assets/styles/toggle.css"><!--Enlace a la hoja de estilos CSS para el toggle-->
-    <link rel="stylesheet" href="./assets/styles/footer.css"><!--Enlace a la hoja de estilos CSS para el footer-->
+    <link rel="stylesheet" href="../../assets/styles/style.css"><!--Enlace a la hoja de estilos CSS (carga después de Bootstrap) -->
+    <link rel="stylesheet" href="../../assets/styles/header.css"><!--Enlace a la hoja de estilos CSS para el header-->
+    <link rel="stylesheet" href="../../assets/styles/toggle.css"><!--Enlace a la hoja de estilos CSS para el toggle-->
+    <link rel="stylesheet" href="../../assets/styles/footer.css"><!--Enlace a la hoja de estilos CSS para el footer-->
+    <link rel="stylesheet" href="../../assets/styles/calculadora.css"><!--Enlace a la hoja de estilos CSS para la calculadora-->
     <title>GeoEnergy</title>
 
 <body class="site"><!--Etiqueta que contiene el contenido visible del documento-->
     <header><!--Etiqueta que define el encabezado de la pagina-->
         <h1><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"class="icon icon-tabler icons-tabler-outline icon-tabler-volcano"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 8v-1a2 2 0 1 0 -4 0" /><path d="M15 8v-1a2 2 0 1 1 4 0" /><path d="M4 20l3.472 -7.812a2 2 0 0 1 1.828 -1.188h5.4a2 2 0 0 1 1.828 1.188l3.472 7.812" /><path d="M6.192 15.064a2.14 2.14 0 0 1 .475 -.064c.527 -.009 1.026 .178 1.333 .5c.307 .32 .806 .507 1.333 .5c.527 .007 1.026 -.18 1.334 -.5c.307 -.322 .806 -.509 1.333 -.5c.527 -.009 1.026 .178 1.333 .5c.308 .32 .807 .507 1.334 .5c.527 .007 1.026 -.18 1.333 -.5c.307 -.322 .806 -.509 1.333 -.5c.161 .003 .32 .025 .472 .064" /><path d="M12 8v-4" /></svg>GeoEnergy</h1><!--ETIQUETA QUE DEFINE UN TITULO DE PRIMER NIVEL-->
         <nav><!--Etiqueta que define una seccion de navegacion-->
-            <a href="index.html" data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
-            <a href="./src/views/dashboard.html" data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
-            <a href="./src/views/calculadora.html" data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
+            <a href="../../index.html" data-section="inicio">Inicio</a><!--Enlace a la seccion de inicio-->
+            <a href="../views/dashboard.html" data-section="dashboard">Dashboard</a><!--Enlace a la seccion de dashboard-->
+            <a href="./calculadora.html" data-section="calculadora">Calculadora</a><!--Enlace a la seccion de calculadora-->
             <div class="nav-toggle" id="nav-toggle"><!--Boton de menu para dispositivos moviles-->
                 <span class="bar"></span><!--Linea del boton de menu-->
                 <span class="bar"></span><!--Linea del boton de menu-->
@@ -31,37 +32,6 @@
             </div>
         </nav>
     </header>
-        
-    <br><br>
-    <section class="Inicio">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6">
-                <h2 class="titulillo">¿Qué es la energía geotérmica?</h2>
-                <p class="parrIni">La energía geotérmica es un tipo de energía más o menos renovable, de origen
-                    volcánico, es decir, que
-                    consiste en aprovechar el calor interno de la Tierra para extraer del subsuelo aguas a elevadas
-                    temperaturas, de la cual puede extraerse la energía calórica o que puede emplearse para generar
-                    electricidad. <br>
-                    A medida que nos acerquemos al núcleo del planeta, las temperaturas aumentan considerablemente, ya
-                    que hay más presión, más gravedad, y menos distancia del núcleo de metal fundido que es el corazón
-                    de la Tierra. Por eso se puede hallar bajo tierra numerosos depósitos de agua hirviente, que puede
-                    ser liberada y conducida a la superficie, dando origen a grandes chorros de vapor, géiseres y aguas
-                    termales que, desde tiempos remotos, han sido aprovechados por la humanidad con diversos fines. Este
-                    tipo de yacimientos son muy frecuentes en zonas de alta actividad volcánica.
-                </p>
-                </div>
-                <div class="divVideo col-12 col-md-6">
-                    <div class="ratio ratio-16x9">
-                        <iframe src="https://www.youtube.com/embed/RUhO7TBQ8MU?si=hOK6idZm2_bPsuRZ"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
     
@@ -101,6 +71,7 @@
         </div>
     </footer>
 
-    <script src="./src/services/script.js"></script><!--Enlace a tu script general-->
+    <script src="../services/script.js"></script><!--Enlace a tu script general-->
+    <script src="../services/calculadora.js"></script><!--Enlace a tu script de la calculadora-->
 </body>
 </html>
