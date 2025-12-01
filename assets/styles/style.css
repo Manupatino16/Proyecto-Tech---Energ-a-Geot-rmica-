@@ -76,6 +76,55 @@ h1 + p {/* Párrafo inmediatamente después de h1 */
   border: 0;
 }
 
+/* Estilos personalizados para tarjetas de ventajas/desventajas */
+.card-custom {
+  background-color: var(--background-secondary); /* Gris oscuro #2a2a24 */
+  border: none;
+  color: var(--text-primary); /* Texto claro */
+  transition: all 0.3s ease;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(217, 144, 88, 0.2) !important;
+}
+
+.card-custom .card-title {
+  color: var(--primary-light); /* Naranja #D99058 */
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.card-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  height: 60px;
+  align-items: center;
+}
+
+.card-icon svg {
+  color: var(--primary-light); /* Naranja #D99058 */
+  width: 48px;
+  height: 48px;
+  stroke-width: 1.5;
+}
+
+.card-custom.card-ventaja .card-icon svg {
+  color: var(--primary-light); /* Naranja para ventajas */
+}
+
+.card-custom.card-desventaja .card-icon svg {
+  color: var(--primary-hover); /* Naranja para desventajas (mismo color) */
+}
+
+.card-custom .list-unstyled li {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
 
 
 

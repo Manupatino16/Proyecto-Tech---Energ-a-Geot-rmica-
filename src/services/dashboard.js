@@ -80,10 +80,10 @@ function initializeCharts() {// Función para inicializar gráficos
         charts.barChart = new Chart(barCtx, {// crear nuevo gráfico
             type: 'bar',// tipo de gráfico
             data: {// datos del gráfico
-                labels: ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'],// etiquetas de países
+                labels: ['Indonesia', 'Filipinas', 'Estados Unidos', 'Turquía', 'Nueva Zelanda', 'México'],// etiquetas de países
                 datasets: [{// conjunto de datos
                     label: 'Producción (TWh)',// etiqueta del conjunto
-                    data: [18.8, 14.2, 10.3, 6.1, 7.9, 5.2],// datos de producción
+                    data: [39.5, 28.8, 24.3, 21.4, 16.8, 12.2],// datos de producción
                     backgroundColor: [// colores de barras
                         'rgba(210, 105, 30, 0.8)',
                         'rgba(255, 99, 71, 0.8)',
@@ -151,7 +151,7 @@ function initializeCharts() {// Función para inicializar gráficos
                             padding: axisOpts.labelPadding,// padding de las etiquetas
                             autoSkip: false,// no omitir etiquetas automáticamente
                             callback: function(value, index, values) {// función para formatear etiquetas
-                                const labels = ['Estados Unidos', 'Indonesia', 'Filipinas', 'Italia', 'Nueva Zelanda', 'Islandia'];// etiquetas originales
+                                const labels = ['Indonesia', 'Filipinas', 'Estados Unidos', 'Turquía', 'Nueva Zelanda', 'México'];// etiquetas originales
                                 const label = labels[index];// obtener etiqueta actual
                                 if (window.innerWidth < 640 && label && label.length > 12) {// en móviles
                                     return label.substring(0, 9) + '...';// truncar etiqueta larga
@@ -200,22 +200,20 @@ function initializeCharts() {// Función para inicializar gráficos
         charts.pieChart = new Chart(pieCtx, {// crear nuevo gráfico
             type: 'pie',// tipo de gráfico
             data: {// datos del gráfico
-                labels: ['Vapor Seco', 'Vapor Flash', 'Ciclo Binario', 'Sistemas Híbridos', 'Otros'],// etiquetas
+                labels: ['Ciclo Binario', 'Vapor Flash', 'Vapor Seco', 'Sistemas Híbridos'],// etiquetas
                 datasets: [{// conjunto de datos
-                    data: [45, 32, 18, 3, 2],// datos porcentuales
+                    data: [42, 32, 20, 6],// datos porcentuales
                     backgroundColor: [// colores de secciones
-                        'rgba(210, 105, 30, 0.8)',
-                        'rgba(255, 99, 71, 0.8)',
                         'rgba(255, 165, 0, 0.8)',
-                        'rgba(255, 140, 0, 0.8)',
-                        'rgba(139, 69, 19, 0.8)'
+                        'rgba(255, 99, 71, 0.8)',
+                        'rgba(210, 105, 30, 0.8)',
+                        'rgba(255, 140, 0, 0.8)'
                     ],
                     borderColor: [// colores de bordes
-                        'rgba(210, 105, 30, 1)',
-                        'rgba(255, 99, 71, 1)',
                         'rgba(255, 165, 0, 1)',
-                        'rgba(255, 140, 0, 1)',
-                        'rgba(139, 69, 19, 1)'
+                        'rgba(255, 99, 71, 1)',
+                        'rgba(210, 105, 30, 1)',
+                        'rgba(255, 140, 0, 1)'
                     ],
                     borderWidth: 2// ancho de bordes
                 }]
@@ -275,7 +273,7 @@ function initializeCharts() {// Función para inicializar gráficos
                 labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],// etiquetas de años
                 datasets: [{// conjunto de datos
                     label: 'Capacidad Instalada (GW)',// etiqueta del conjunto
-                    data: [13.3, 13.9, 14.1, 14.8, 15.2, 15.9, 16.4],// datos de capacidad
+                    data: [14.1, 14.3, 14.9, 15.4, 16.4, 17.9, 21.8],// datos de capacidad
                     borderColor: 'rgba(210, 105, 30, 1)',// color de la línea
                     backgroundColor: 'rgba(210, 105, 30, 0.1)',// color del área bajo la línea
                     borderWidth: 3,// ancho de la línea
